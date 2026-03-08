@@ -37,7 +37,7 @@ export function renderFuzzyInput(id, labelA, labelB, currentValue = null, option
       </option>
     `).join('');
 
-  const isEqual = !currentValue || currentValue.direction === 'equal';
+  const isEqual = currentValue?.direction === 'equal';
 
   return `
     <div class="fuzzy-input" data-fuzzy-id="${id}">
@@ -45,10 +45,10 @@ export function renderFuzzyInput(id, labelA, labelB, currentValue = null, option
         <label class="form-label fuzzy-input__direction-label" for="${id}_direction">Preferred:</label>
         <div class="fuzzy-input__select-wrap">
           <select id="${id}_direction" class="form-select fuzzy-direction-select" data-fuzzy-id="${id}">
+            <option value="" disabled ${!currentValue ? 'selected' : ''}>-- Choose --</option>
             ${directionOptions.map(opt => `
               <option value="${opt.value}" ${
-                (currentValue?.direction === opt.value ||
-                (!currentValue && opt.value === 'equal')) ? 'selected' : ''
+                (currentValue?.direction === opt.value) ? 'selected' : ''
               }>
                 ${opt.label}
               </option>
@@ -60,6 +60,7 @@ export function renderFuzzyInput(id, labelA, labelB, currentValue = null, option
         <label class="form-label fuzzy-input__direction-label" for="${id}_intensity">By how much:</label>
         <div class="fuzzy-input__select-wrap">
           <select id="${id}_intensity" class="form-select fuzzy-intensity-select" data-fuzzy-id="${id}">
+            <option value="" disabled ${!currentValue?.saaty ? 'selected' : ''}>-- Choose --</option>
             ${intensityOptions}
           </select>
         </div>
@@ -86,6 +87,11 @@ export function attachFuzzyInputListeners(container, id, onChange, options = COM
 
   function emitChange() {
     const direction = directionEl.value;
+
+    // Ignore empty placeholder selection
+    if (!direction) {
+      return;
+    }
 
     if (direction === 'equal') {
       intensityRow.style.display = 'none';

@@ -44,13 +44,13 @@ export const STEP_LABELS = {
 export const LINGUISTIC_SCALE = [
   { saaty: 1, label: 'Equally important',    fuzzy: [1, 1, 1] },
   { saaty: 2, label: '—',                   fuzzy: [1, 2, 3] },
-  { saaty: 3, label: 'Weakly important',     fuzzy: [2, 3, 4] },
+  { saaty: 3, label: 'Slightly more important',     fuzzy: [2, 3, 4] },
   { saaty: 4, label: '—',                   fuzzy: [3, 4, 5] },
-  { saaty: 5, label: 'Fairly important',     fuzzy: [4, 5, 6] },
+  { saaty: 5, label: 'Fairly more important',     fuzzy: [4, 5, 6] },
   { saaty: 6, label: '—',                   fuzzy: [5, 6, 7] },
-  { saaty: 7, label: 'Strongly important',   fuzzy: [6, 7, 8] },
+  { saaty: 7, label: 'Significantly more important',   fuzzy: [6, 7, 8] },
   { saaty: 8, label: '—',                   fuzzy: [7, 8, 9] },
-  { saaty: 9, label: 'Absolutely important', fuzzy: [9, 9, 9] },
+  { saaty: 9, label: 'Absolutely more important', fuzzy: [9, 9, 9] },
 ];
 
 /**
